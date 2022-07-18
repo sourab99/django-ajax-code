@@ -1,0 +1,30 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#sexy-form").submit(function(e){
+            e.preventDefault();
+            name = $('#name').val();
+            address = $('#address').val();
+            qualification = $('#qualification').val();
+            interest = $('#interest').val();
+            
+            $.ajax({
+            type: 'POST',
+            url: "{% url 'new' %}",
+            data: {
+                name : name,
+                address : address,
+                qualification : qualification,
+                interest : interest,
+                csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success:function(res, status){
+                alert('submit successfully');
+                window.location.href = '/';
+                }
+                
+            });
+        });
+    });
+
+</script>
